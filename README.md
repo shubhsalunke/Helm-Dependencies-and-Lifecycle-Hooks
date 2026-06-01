@@ -25,7 +25,6 @@ helm-dependency-hooks/
         ├── pre-install-hook.yaml
         ├── post-install-hook.yaml
         └── tests/
-
 ```
 
 # Server Details
@@ -152,14 +151,14 @@ helm version
 
 ---
 
-# Step 7: Clone Repository
+# Step 7: Create Helm Project
 
 ```bash
-git clone https://github.com/shubhsalunke/react-node-mysql-crud.git
+mkdir helm-dependency-hooks
 ```
 
 ```bash
-cd Helm-Dependencies-and-Lifecycle-Hooks
+cd helm-dependency-hooks
 ```
 
 Create Helm Chart:
@@ -214,6 +213,63 @@ redis   20.11.4
 
 ---
 
+# Step 10: Create Pre-Install Hook
+
+```bash
+nano templates/pre-install-hook.yaml
+```
+
+Paste:
+
+```yaml
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: pre-install-job
+  annotations:
+    "helm.sh/hook": pre-install
+spec:
+  template:
+    spec:
+      containers:
+      - name: pre-install
+        image: busybox
+        command: ['sh', '-c', 'echo Pre install hook running']
+      restartPolicy: Never
+```
+
+Save and Exit.
+
+---
+
+# Step 11: Create Post-Install Hook
+
+```bash
+nano templates/post-install-hook.yaml
+```
+
+Paste:
+
+```yaml
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: post-install-job
+  annotations:
+    "helm.sh/hook": post-install
+spec:
+  template:
+    spec:
+      containers:
+      - name: post-install
+        image: busybox
+        command: ['sh', '-c', 'echo Post install hook running']
+      restartPolicy: Never
+```
+
+Save and Exit.
+
+---
 
 # Step 12: Install Application
 
