@@ -152,14 +152,14 @@ helm version
 
 ---
 
-# Step 7: Create Helm Project
+# Step 7: Clone Repository
 
 ```bash
-mkdir helm-dependency-hooks
+git clone https://github.com/shubhsalunke/react-node-mysql-crud.git
 ```
 
 ```bash
-cd helm-dependency-hooks
+cd Helm-Dependencies-and-Lifecycle-Hooks
 ```
 
 Create Helm Chart:
